@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: locations-history
+  main:
+    banner-mode: 'off'
+
+logging:
+  level:
+    root: info
+    com.zholdak.locationshistory: trace
