@@ -10,6 +10,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
+import com.zholdak.locationshistory.location.Distance;
+
+import io.jenetics.jpx.WayPoint;
+import io.jenetics.jpx.geom.Geoid;
+
 @SpringBootApplication
 public class LocationsHistoryApplication implements ApplicationRunner, ApplicationContextAware {
 
@@ -29,6 +34,11 @@ public class LocationsHistoryApplication implements ApplicationRunner, Applicati
 		if (args.containsOption(INPUT_LOCATIONS_HISTORY)) {
 			inputLocationsHistory = args.getOptionValues(INPUT_LOCATIONS_HISTORY);
 		}
+
+//		System.out.println("####d " + Distance.distance(50.432565, 30.460247, 50.432359, 30.511133));
+//		System.out.println("####w " + Geoid.WGS84.distance(WayPoint.of(50.432565, 30.460247), WayPoint.of(50.432359, 30.511133)));
+//		System.out.println("####d " + Distance.distance(50.468514, 27.206538, 50.272173, 30.017172));
+//		System.out.println("####w " + Geoid.WGS84.distance(WayPoint.of(50.468514, 27.206538), WayPoint.of(50.272173, 30.017172)));
 
 		applicationContext.getBean(GoogleLocationsHistoryImporter.class).run(inputLocationsHistory);
 	}

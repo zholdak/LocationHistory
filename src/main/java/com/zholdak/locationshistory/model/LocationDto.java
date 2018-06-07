@@ -2,6 +2,7 @@ package com.zholdak.locationshistory.model;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.Comparator;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -12,6 +13,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.zholdak.locationshistory.converter.GeocodeE7Converter;
 import com.zholdak.locationshistory.converter.InstantConverter;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -25,10 +27,11 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 @Getter
 @Setter
 @ToString
+@EqualsAndHashCode
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(value = NON_NULL)
 @JsonAutoDetect(fieldVisibility = NONE, getterVisibility = NONE, setterVisibility = NONE, isGetterVisibility = NONE)
-public class Location {
+public class LocationDto {
 
 	@JsonProperty("timestampMs")
 	@JsonSerialize(using = InstantConverter.ToMillisJsonSerializer.class)
@@ -60,5 +63,10 @@ public class Location {
 	@JsonProperty("verticalAccuracy")
 	private Integer verticalAccuracy;
 
-
+	public static class ComparatorByTimestamp implements Comparator<LocationDto> {
+		@Override
+		public int compare(LocationDto location1, LocationDto location2) {
+			return location1.getTimestamp().compareTo(location2.getTimestamp());
+		}
+	}
 }

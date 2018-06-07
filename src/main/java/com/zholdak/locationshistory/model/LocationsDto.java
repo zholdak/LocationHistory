@@ -24,8 +24,8 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(value = NON_NULL)
 @JsonAutoDetect(fieldVisibility = NONE, getterVisibility = NONE, setterVisibility = NONE, isGetterVisibility = NONE)
-public class Locations {
+public class LocationsDto {
 
 	@JsonProperty("locations")
-	private List<Location> locations = new ArrayList<>();
+	private List<LocationDto> locations = new ArrayList<>();
 }
